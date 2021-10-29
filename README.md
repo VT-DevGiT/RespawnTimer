@@ -1,6 +1,6 @@
 # RespawnTimer
 
-Add a respawn countdown to the next respawn in seconde for the spectator. 
+Add a respawn countdown to the next respawn in minute and second for the spectator. 
 Currently there is no config.
 The language is chosen in the basic synapse configs, if a language is not supported add it in the translation file.
 
