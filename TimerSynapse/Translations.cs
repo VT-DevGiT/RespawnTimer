@@ -15,10 +15,10 @@ namespace TimerSynapse
         public string CI { get; set; } = "<color=army_green>Chaos Insurgency</color>";
 
         [Description("When there is multiple minute or second i will automatically add a 's' for ENGLISH and FRENCH ONLY")]
-        public string min { get; set; } = "Minute";
-        public string sec { get; set; } = "Second";
+        public string Min { get; set; } = "Minute";
+        public string Sec { get; set; } = "Second";
 
-        public string and { get; set; } = "and";
+        public string And { get; set; } = "and";
         public bool AutoS { get; set; } = true;
 
 
