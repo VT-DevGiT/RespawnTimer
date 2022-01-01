@@ -15,7 +15,7 @@ namespace TimerSynapse
         LoadPriority = 0,
         SynapseMajor = 2,
         SynapseMinor = 8,
-        SynapsePatch = 0,
+        SynapsePatch = 1,
         Version = "v.2.1.0"
         )]
     public class Plugin : AbstractPlugin
