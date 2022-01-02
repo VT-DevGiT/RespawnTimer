@@ -30,7 +30,7 @@ namespace TimerSynapse
             Translations.AddTranslation(new Translations
             {
                 And = "et",
-                CI = "<color=army_green>Insurgé du Chaos</color>",
+                CI = "<color=#004d00>Insurgé du Chaos</color>",
                 NTF = "<color=blue>Nine-Tailed Fox</color>",
                 Min = "Minute",
                 Sec = "seconde",
@@ -42,7 +42,7 @@ namespace TimerSynapse
             Translations.AddTranslation(new Translations
             {
                 And = "und",
-                CI = "<color=army_green>Chaos-Aufstand</color>",
+                CI = "<color=#004d00>Chaos-Aufstand</color>",
                 NTF = "<color=blue>Nine-Tailed Fox</color>",
                 Min = "Minuten",
                 Sec = "Sekunde",
