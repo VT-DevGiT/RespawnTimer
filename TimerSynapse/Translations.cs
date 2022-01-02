@@ -12,7 +12,7 @@ namespace TimerSynapse
 
         public string NTF { get; set; } = "<color=blue>Nine-Tailed Fox</color>";
 
-        public string CI { get; set; } = "<color=army_green>Chaos Insurgency</color>";
+        public string CI { get; set; } = "<color=#004d00>Chaos Insurgency</color>";
 
         [Description("When there is multiple minute or second i will automatically add a 's' for ENGLISH and FRENCH ONLY")]
         public string Min { get; set; } = "Minute";
