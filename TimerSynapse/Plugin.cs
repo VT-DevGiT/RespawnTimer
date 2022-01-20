@@ -13,9 +13,9 @@ namespace TimerSynapse
         Author = "Antoniofo",
         Description = "Respawn Timer in Synapse",
         LoadPriority = 0,
-        SynapseMajor = 2,
-        SynapseMinor = 8,
-        SynapsePatch = 1,
+        SynapseMajor = SynapseController.SynapseMajor,
+        SynapseMinor = SynapseController.SynapseMinor,
+        SynapsePatch = SynapseController.SynapsePatch,
         Version = "v.2.1.0"
         )]
     public class Plugin : AbstractPlugin
