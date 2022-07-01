@@ -19,7 +19,7 @@ namespace TimerSynapse
         public string Sec { get; set; } = "Second";
 
         public string And { get; set; } = "and";
-        public bool AutoS { get; set; } = true;
+        public bool AutoS { get; set; } = true; 
 
 
     }

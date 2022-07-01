@@ -54,14 +54,14 @@ namespace TimerSynapse
             base.Load();
         }
 
-        CoroutineHandle TimerCoroutine;
+        CoroutineHandle TimerHandler { get; set; }
         public void OnRoundStart()
         {
-            if (TimerCoroutine.IsRunning)
+            if (TimerHandler.IsRunning)
             {
-                Timing.KillCoroutines(TimerCoroutine);
+                Timing.KillCoroutines(TimerHandler);
             }
-            TimerCoroutine = Timing.RunCoroutine(TimerShow());
+            TimerHandler = Timing.RunCoroutine(TimerShow());
         }
 
         private IEnumerator<float> TimerShow()
@@ -72,54 +72,55 @@ namespace TimerSynapse
 
                 try
                 {
-                    int Res = (int)Math.Round(Map.Get.Round.NextRespawn);
-                    string Text;
-                    bool Boolean = Translations.ActiveTranslation.AutoS;
-                    if (Res % 60 == 0)
+                    int timeRespawn = (int)Math.Round(Map.Get.Round.NextRespawn), timeMinute = timeRespawn / 60, timeSecond = timeRespawn % 60; 
+                    bool autoS = Translations.ActiveTranslation.AutoS;
+                    string message;
+
+                    if (timeSecond == 0)
                     {
-                        Text = $"{Translations.ActiveTranslation.YoullRes} \n {Res / 60} {Translations.ActiveTranslation.Min}{(Res / 60 <= 1 && Boolean ? "" : "s")}";
+                        message = $"{Translations.ActiveTranslation.YoullRes}\n{timeRespawn} {Translations.ActiveTranslation.Min}{(timeRespawn <= 1 && autoS ? "" : "s")}";
                         if ((int)Respawning.RespawnManager.Singleton.NextKnownTeam == 1)
                         {
-                            Text += "\n";
-                            Text += $"{Translations.ActiveTranslation.YoullBe} {Translations.ActiveTranslation.CI}";
+                            message += "\n";
+                            message += $"{Translations.ActiveTranslation.YoullBe} {Translations.ActiveTranslation.CI}";
                         }
                         else if ((int)Respawning.RespawnManager.Singleton.NextKnownTeam == 2)
                         {
-                            Text += "\n";
-                            Text += $"{Translations.ActiveTranslation.YoullBe} {Translations.ActiveTranslation.NTF}";
+                            message += "\n";
+                            message += $"{Translations.ActiveTranslation.YoullBe} {Translations.ActiveTranslation.NTF}";
                         }
                     }
-                    else if (Res / 60 > 0)
+                    else if (timeRespawn / 60 > 0)
                     {
-                        Text = $"{Translations.ActiveTranslation.YoullRes} \n {(Res / 60)} {Translations.ActiveTranslation.Min}{(Res / 60 <= 1 && Boolean ? "" : "s")} {Translations.ActiveTranslation.And} { Res % 60} {Translations.ActiveTranslation.Sec}{(Res % 60 <= 1 && Boolean ? "" : "s")}";
+                        message = $"{Translations.ActiveTranslation.YoullRes}\n{timeRespawn} {Translations.ActiveTranslation.Min}{(timeRespawn <= 1 && autoS ? "" : "s")} {Translations.ActiveTranslation.And} {timeSecond} {Translations.ActiveTranslation.Sec}{(timeSecond <= 1 && autoS ? "" : "s")}";
                         if ((int)Respawning.RespawnManager.Singleton.NextKnownTeam == 1)
                         {
-                            Text += "\n";
-                            Text += $"{Translations.ActiveTranslation.YoullBe} {Translations.ActiveTranslation.CI}";
+                            message += "\n";
+                            message += $"{Translations.ActiveTranslation.YoullBe} {Translations.ActiveTranslation.CI}";
                         }
                         else if ((int)Respawning.RespawnManager.Singleton.NextKnownTeam == 2)
                         {
-                            Text += "\n";
-                            Text += $"{Translations.ActiveTranslation.YoullBe} {Translations.ActiveTranslation.NTF}";
+                            message += "\n";
+                            message += $"{Translations.ActiveTranslation.YoullBe} {Translations.ActiveTranslation.NTF}";
                         }
                     }
                     else
                     {
-                        Text = $"{Translations.ActiveTranslation.YoullRes} \n { Res % 60} {Translations.ActiveTranslation.Sec}{(Res % 60 <= 1 && Boolean ? "" : "s")}";
+                        message = $"{Translations.ActiveTranslation.YoullRes}\n{timeSecond} {Translations.ActiveTranslation.Sec}{(timeSecond <= 1 && autoS ? "" : "s")}";
                         if ((int)Respawning.RespawnManager.Singleton.NextKnownTeam == 1)
                         {
-                            Text += "\n";
-                            Text += $"{Translations.ActiveTranslation.YoullBe} {Translations.ActiveTranslation.CI}";
+                            message += "\n";
+                            message += $"{Translations.ActiveTranslation.YoullBe} {Translations.ActiveTranslation.CI}";
                         }
                         else if ((int)Respawning.RespawnManager.Singleton.NextKnownTeam == 2)
                         {
-                            Text += "\n";
-                            Text += $"{Translations.ActiveTranslation.YoullBe} {Translations.ActiveTranslation.NTF}";
+                            message += "\n";
+                            message += $"{Translations.ActiveTranslation.YoullBe} {Translations.ActiveTranslation.NTF}";
                         }
                     }
                     foreach (Player player in RoleType.Spectator.GetPlayers())
                     {
-                        player.GiveTextHint($"{Text}", 1.2f);
+                        player.GiveTextHint($"{message}", 1.2f);
                     }
                 }
                 catch (Exception err)
