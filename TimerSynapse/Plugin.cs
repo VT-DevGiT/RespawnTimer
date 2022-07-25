@@ -1,4 +1,5 @@
 ﻿using MEC;
+using System.Linq;
 using Synapse;
 using Synapse.Api;
 using Synapse.Api.Plugin;
@@ -78,7 +79,7 @@ namespace TimerSynapse
 
                     if (timeSecond == 0)
                     {
-                        message = $"{Translations.ActiveTranslation.YoullRes}\n{timeRespawn} {Translations.ActiveTranslation.Min}{(timeRespawn <= 1 && autoS ? "" : "s")}";
+                        message = $"{Translations.ActiveTranslation.YoullRes}\n{timeMinute} {Translations.ActiveTranslation.Min}{(timeRespawn <= 1 && autoS ? "" : "s")}";
                         if ((int)Respawning.RespawnManager.Singleton.NextKnownTeam == 1)
                         {
                             message += "\n";
@@ -92,7 +93,7 @@ namespace TimerSynapse
                     }
                     else if (timeRespawn / 60 > 0)
                     {
-                        message = $"{Translations.ActiveTranslation.YoullRes}\n{timeRespawn} {Translations.ActiveTranslation.Min}{(timeRespawn <= 1 && autoS ? "" : "s")} {Translations.ActiveTranslation.And} {timeSecond} {Translations.ActiveTranslation.Sec}{(timeSecond <= 1 && autoS ? "" : "s")}";
+                        message = $"{Translations.ActiveTranslation.YoullRes}\n{timeMinute} {Translations.ActiveTranslation.Min}{(timeRespawn <= 1 && autoS ? "" : "s")} {Translations.ActiveTranslation.And} {timeSecond} {Translations.ActiveTranslation.Sec}{(timeSecond <= 1 && autoS ? "" : "s")}";
                         if ((int)Respawning.RespawnManager.Singleton.NextKnownTeam == 1)
                         {
                             message += "\n";
@@ -118,7 +119,7 @@ namespace TimerSynapse
                             message += $"{Translations.ActiveTranslation.YoullBe} {Translations.ActiveTranslation.NTF}";
                         }
                     }
-                    foreach (Player player in RoleType.Spectator.GetPlayers())
+                    foreach (var player in Server.Get.Players.Where(x => (int)x.RoleType == 2))
                     {
                         player.GiveTextHint($"{message}", 1.2f);
                     }
